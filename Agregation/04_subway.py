@@ -8,7 +8,7 @@ collection_ingredients = db['ingredients']
 collection_sauces = db['sauces']
 
 def insert_ingredients_and_sauces():
-    """Insertion des ingrédients et sauces (exemple de données)"""
+    """Partie 1 : Insertion des ingrédients et sauces"""
     ingredients_data = [
         {"ingredientId": 1, "name": "Tomato", "price": 0.5},
         {"ingredientId": 2, "name": "Lettuce", "price": 0.3},
@@ -25,7 +25,7 @@ def insert_ingredients_and_sauces():
     print("Données des ingrédients et sauces insérées.")
 
 def create_order():
-    """Création d'une nouvelle commande"""
+    """Partie 2 : Création d'une nouvelle commande"""
     ingredients = [1, 2]  # Ids des ingrédients sélectionnés par l'utilisateur
     sauce = 1  # Id de la sauce sélectionnée par l'utilisateur
     total_price = 0
@@ -49,7 +49,7 @@ def create_order():
     print("Commande créée avec id:", result.inserted_id)
 
 def view_revenue():
-    """Voir le chiffre d'affaires"""
+    """Partie 3 : Voir le chiffre d'affaires"""
     pipeline = [
         {"$group": {"_id": None, "totalRevenue": {"$sum": "$total_price"}}}
     ]
@@ -58,7 +58,7 @@ def view_revenue():
         print("Chiffre d'affaires total:", doc["totalRevenue"])
 
 def main_menu():
-    """Menu principal de l'application"""
+    """Partie 4 : Menu principal de l'application"""
     while True:
         print("\nMenu Principal")
         print("1. Nouvelle commande")
@@ -76,5 +76,5 @@ def main_menu():
             print("Option invalide, veuillez réessayer.")
 
 if __name__ == "__main__":
-    insert_ingredients_and_sauces()
-    main_menu()
+    insert_ingredients_and_sauces()  # Partie 1 : Insertion des ingrédients et sauces
+    main_menu()  # Partie 4 : Affichage du menu principal et interaction avec l'utilisateur
