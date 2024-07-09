@@ -70,4 +70,44 @@ def main_menu():
         print("\nMenu Principal")
         print("1. Nouvelle commande")
         print("2. Voir les stocks")
-        print
+        print("3. Voir les tendances de consommation")
+        print("4. Quitter")
+        choice = input("Choisissez une option: ")
+
+        if choice == "1":
+            create_order()
+        elif choice == "2":
+            view_stocks()
+        elif choice == "3":
+            analyze_consumption_trends()
+        elif choice == "4":
+            break
+        else:
+            print("Option invalide, veuillez réessayer.")
+
+def create_order():
+    """Création d'une nouvelle commande"""
+    produits = [
+        {"nom": "Tomato", "quantite": 2},
+        {"nom": "Chicken", "quantite": 1}
+    ]
+    total_price = sum([collection_stocks.find_one({"name": produit['nom']})["price"] * produit['quantite'] for produit in produits])
+    order = {
+        "produits": produits,
+        "total_price": total_price
+    }
+    result = collection_commandes.insert_one(order)
+    update_stock(order)
+    alert_low_stock()
+    print("Commande créée avec id:", result.inserted_id)
+
+def view_stocks():
+    """Voir les stocks actuels"""
+    stocks = collection_stocks.find()
+    print("Stocks actuels:")
+    for stock in stocks:
+        print(stock)
+
+if __name__ == "__main__":
+    insert_data()  # Partie 1 : Insertion des commandes et des stocks
+    main_menu()  # Partie 5 : Affichage du menu principal et interaction avec l'utilisateur
