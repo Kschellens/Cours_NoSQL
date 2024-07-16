@@ -1,0 +1,50 @@
+# Écrire des Scripts pour Créer et Restaurer des Sauvegardes sur MongoDB Atlas
+
+## Objectif :
+
+Les étudiants apprendront à écrire des scripts pour créer et restaurer des sauvegardes sur MongoDB Atlas en utilisant les commandes `mongodump` et `mongorestore`.
+
+## Prérequis :
+
+- Compte MongoDB Atlas avec un cluster actif
+- Connaissances de base en script bash et en API MongoDB Atlas
+- curl installé sur votre machine locale
+
+## Étapes :
+
+1. Configurer l'Accès à l'API MongoDB Atlas :
+   
+   - Allez sur le tableau de bord MongoDB Atlas et accédez à la section "Access Manager".
+   - Créez une nouvelle clé API avec les autorisations nécessaires pour accéder à votre cluster.
+   - Notez les clés publique et privée générées pour la clé API.
+
+2. Script pour Créer des Sauvegardes :
+
+   - Écrivez un script bash qui utilise curl pour interagir avec l'API MongoDB Atlas et créer une capture instantanée de sauvegarde.
+   - Utilisez la commande `mongodump` pour créer une sauvegarde des données de votre cluster MongoDB.
+
+3. Script pour Restaurer des Sauvegardes :
+
+   - Écrivez un script bash qui utilise curl pour interagir avec l'API MongoDB Atlas et restaurer une capture instantanée de sauvegarde.
+   - Utilisez la commande `mongorestore` pour restaurer les données de sauvegarde sur votre cluster MongoDB.
+
+4. Rendre les Scripts Exécutables :
+
+   - Définissez la permission exécutable pour les scripts de sauvegarde et de restauration en utilisant la commande `chmod`.
+   - Assurez-vous que les scripts sont enregistrés dans un emplacement sécurisé et accessibles uniquement aux utilisateurs autorisés.
+
+5. Tester les Scripts de Sauvegarde et de Restauration :
+
+   - Exécutez le script de sauvegarde pour créer une sauvegarde des données de votre cluster MongoDB.
+   - Vérifiez que la capture instantanée de sauvegarde est créée avec succès.
+   - Exécutez le script de restauration pour restaurer les données de sauvegarde sur votre cluster MongoDB.
+   - Vérifiez que les données sont restaurées correctement et que le cluster est opérationnel.
+
+## Résultats Attendus :
+
+- Les étudiants devraient comprendre comment utiliser des scripts bash pour interagir avec l'API MongoDB Atlas pour créer et restaurer des sauvegardes.
+- Le rapport devrait détailler les étapes suivies, les défis rencontrés et le résultat final des opérations de sauvegarde et de restauration.
+
+## Résumé :
+
+En écrivant des scripts pour créer et restaurer des sauvegardes sur MongoDB Atlas, vous pouvez automatiser le processus de sauvegarde et garantir l'intégrité et la disponibilité des données. Ces scripts fournissent un moyen pratique de gérer les sauvegardes et de simplifier le processus de récupération en cas de perte de données ou de défaillances système.

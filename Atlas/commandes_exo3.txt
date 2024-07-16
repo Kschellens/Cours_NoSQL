@@ -1,0 +1,69 @@
+# Création d'Utilisateurs Basés sur des Rôles dans MongoDB Atlas
+
+## Objectif :
+
+Les étudiants apprendront à créer des utilisateurs basés sur des rôles dans MongoDB Atlas pour gérer efficacement l'accès et les permissions aux bases de données.
+
+## Prérequis :
+
+- Un compte MongoDB Atlas
+- Un cluster déployé sur MongoDB Atlas
+- Outils en ligne de commande MongoDB installés localement
+
+## Étapes :
+
+1. **Accéder à MongoDB Atlas :**
+
+    - Allez sur le [site Web de MongoDB Atlas](https://www.mongodb.com/cloud/atlas) et connectez-vous à votre compte.
+    - Sélectionnez le cluster pour lequel vous souhaitez créer un nouvel utilisateur.
+
+2. **Naviguer vers Accès à la Base de Données :**
+
+    - Cliquez sur l'onglet "Database Access" dans la barre latérale gauche du tableau de bord Atlas.
+    - Cliquez sur le bouton "Add New Database User".
+
+3. **Créer un Nouvel Utilisateur :**
+
+    - Entrez le nom d'utilisateur et le mot de passe pour le nouvel utilisateur.
+    - Définissez les privilèges de l'utilisateur en sélectionnant le rôle approprié dans le menu déroulant.
+
+4. **Attribuer des Rôles Personnalisés :**
+
+    - Naviguez vers "Project Settings" et sélectionnez "Roles".
+    - Cliquez sur "Add New Role".
+    - Entrez un nom pour le rôle et spécifiez les privilèges (actions) qu'il doit inclure, tels que find, insert, update, etc.
+
+5. **Attribuer des Rôles aux Utilisateurs :**
+
+    - Retournez à l'onglet "Database Access".
+    - Modifiez l'utilisateur que vous avez créé précédemment et attribuez-lui le rôle personnalisé que vous avez défini.
+
+6. **Tester l'Accès Utilisateur :**
+
+    - Utilisez les outils en ligne de commande MongoDB pour vous connecter à votre cluster avec les nouvelles informations d'identification utilisateur.
+    - Vérifiez que l'utilisateur peut effectuer les actions autorisées par le rôle attribué.
+    - Exemple de commande :
+        ```bash
+        mongo "mongodb+srv://<username>:<password>@<cluster-url>/<database>"
+        ```
+    - Effectuez des actions autorisées par les rôles attribués pour garantir que l'utilisateur dispose des permissions correctes.
+
+7. **Surveiller l'Activité des Utilisateurs :**
+
+    - Vérifiez l'onglet "Logs" dans le tableau de bord Atlas pour surveiller l'activité des utilisateurs et les journaux d'accès.
+    - Examinez les journaux pour vous assurer que les utilisateurs accèdent à la base de données comme prévu et qu'il n'y a pas d'activités non autorisées.
+
+## Rapporter les Observations :
+
+- Documentez le processus de création des utilisateurs et l'attribution des rôles.
+- Incluez des captures d'écran et des commandes utilisées pendant le processus.
+- Vérifiez que les permissions fonctionnent comme prévu en effectuant diverses opérations sur la base de données.
+
+## Résultats Attendus :
+
+- Les étudiants devraient être capables de créer des utilisateurs basés sur des rôles dans MongoDB Atlas et d'attribuer des rôles personnalisés pour gérer efficacement l'accès aux bases de données.
+- Le rapport devrait détailler les étapes suivies, les défis rencontrés et la vérification des permissions utilisateur.
+
+## Résumé :
+
+En créant des utilisateurs basés sur des rôles dans MongoDB Atlas, vous pouvez contrôler l'accès à vos bases de données et vous assurer que les utilisateurs disposent des permissions nécessaires pour effectuer leurs tâches. Les rôles personnalisés vous permettent de définir des permissions granulaires basées sur des actions spécifiques, offrant une manière sécurisée et efficace de gérer l'accès aux bases de données dans votre cluster MongoDB Atlas.

@@ -1,0 +1,47 @@
+# Surveiller MongoDB Atlas avec mongostat et mongotop
+
+## Objectif :
+
+Les étudiants apprendront à utiliser les outils mongostat et mongotop pour surveiller les performances de leur cluster MongoDB sur MongoDB Atlas.
+
+## Prérequis :
+
+- Compte MongoDB Atlas avec un cluster actif
+- MongoDB installé localement pour utiliser mongostat et mongotop
+
+## Étapes :
+
+1. Déployer un Cluster sur MongoDB Atlas :
+
+   - Suivez les instructions de création de compte et de cluster disponibles dans le document Introduction To Atlas.md.
+
+2. Configurer l'Accès à Votre Cluster :
+
+   - Créez un utilisateur de base de données et ajoutez votre adresse IP à la liste blanche comme décrit dans le document.
+   - Obtenez la chaîne de connexion pour votre cluster.
+
+3. Utiliser mongostat pour Surveiller les Performances :
+
+   - Ouvrez un terminal et connectez-vous à votre cluster en utilisant mongostat avec la chaîne de connexion obtenue.
+   - Surveillez les métriques de performance en temps réel telles que les opérations d'insertion, de requête, de mise à jour, de suppression, etc.
+
+4. Utiliser mongotop pour Analyser les Temps de Lecture et d'Écriture :
+
+   - Ouvrez un terminal et connectez-vous à votre cluster en utilisant mongotop avec la chaîne de connexion obtenue.
+   - Analysez les temps de lecture et d'écriture pour les opérations de base de données.
+   (pour cette étape, vous devez exécuter quelques requêtes sur votre cluster pour voir les résultats)
+
+5. Rapporter les Observations :
+
+   - Enregistrez les métriques de performance observées en utilisant mongostat et mongotop.
+   - Analysez les données pour identifier tout goulot d'étranglement ou problème de performance.
+   - Partagez vos découvertes avec la classe et discutez-en.
+
+## Résultats Attendus :
+
+- Les étudiants devraient comprendre comment utiliser mongostat et mongotop pour surveiller les performances d'un cluster MongoDB.
+- Le rapport devrait inclure une analyse des métriques de performance et des recommandations d'optimisation si des goulots d'étranglement ou des anomalies sont détectés.
+
+## Résumé :
+
+En utilisant mongostat et mongotop, vous pouvez obtenir des informations précieuses sur les performances de votre cluster MongoDB sur MongoDB Atlas. Ces outils fournissent des capacités de surveillance en temps réel et vous aident à identifier et à résoudre efficacement les problèmes de performance.
