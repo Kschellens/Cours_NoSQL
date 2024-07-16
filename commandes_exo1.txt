@@ -1,0 +1,42 @@
+// Démarrer les instances mongod avec la configuration de réplication
+// mongod --config D:\Cours_NoSQL\Replication\mongod.conf --port 27017 --dbpath D:\Cours_NoSQL\Replication\db1 --bind_ip localhost
+// mongod --config D:\Cours_NoSQL\Replication\mongod.conf --port 27018 --dbpath D:\Cours_NoSQL\Replication\db2 --bind_ip localhost
+// mongod --config D:\Cours_NoSQL\Replication\mongod.conf --port 27019 --dbpath D:\Cours_NoSQL\Replication\db3 --bind_ip localhost
+
+// Se connecter à l'instance MongoDB principale
+// mongosh --port 27017
+
+// Initialiser le set de réplication
+// rs.initiate()
+
+// Ajouter les instances secondaires au set de réplication
+// rs.add("localhost:27018")
+// rs.add("localhost:27019")
+
+// Vérifier le statut du set de réplication
+// rs.status()
+
+// Créer la collection "characters"
+// db.createCollection("characters")
+
+// Insérer des documents dans la collection "characters"
+// db.characters.insertMany([
+//    { "name": "Jon Snow", "age": 25, "house": "Stark" },
+//    { "name": "Daenerys Targaryen", "age": 23, "house": "Targaryen" },
+//    { "name": "Tyrion Lannister", "age": 30, "house": "Lannister" }
+// ])
+
+// Vérifier que les documents ont été insérés
+// db.characters.find()
+
+// Se connecter à l'instance secondaire sur le port 27018
+// mongo --port 27018
+// Vérifier les données répliquées
+// use GameOfThrones
+// db.characters.find()
+
+// Se connecter à l'instance secondaire sur le port 27019
+// mongo --port 27019
+// Vérifier les données répliquées
+// use GameOfThrones
+// db.characters.find()

@@ -1,0 +1,120 @@
+# Contenu du fichier de configuration à créer manuellement : `mongod.conf`
+"""
+replication:
+   replSetName: 'rs0'
+"""
+
+# Démarrer les instances mongod avec la configuration correcte
+# À exécuter dans des fenêtres PowerShell ou CMD séparées
+"""
+subprocess.Popen([
+    "mongod", "--replSet", "rs0", "--port", "27017", 
+    "--dbpath", "D:\\Cours_NoSQL\\data\\db1", "--bind_ip", "localhost", 
+    "--config", "D:\\Cours_NoSQL\\Replication\\mongod.conf"
+])
+"""
+
+"""
+subprocess.Popen([
+    "mongod", "--replSet", "rs0", "--port", "27018", 
+    "--dbpath", "D:\\Cours_NoSQL\\data\\db2", "--bind_ip", "localhost", 
+    "--config", "D:\\Cours_NoSQL\\Replication\\mongod.conf"
+])
+"""
+
+"""
+subprocess.Popen([
+    "mongod", "--replSet", "rs0", "--port", "27019", 
+    "--dbpath", "D:\\Cours_NoSQL\\data\\db3", "--bind_ip", "localhost", 
+    "--config", "D:\\Cours_NoSQL\\Replication\\mongod.conf"
+])
+"""
+
+# Pause pour s'assurer que les instances sont démarrées
+"""
+time.sleep(10)
+"""
+
+# Initialiser le set de réplication
+"""
+client = MongoClient('localhost', 27017)
+db = client.admin
+db.command("replSetInitiate")
+"""
+
+# Ajouter les autres instances au set de réplication
+"""
+client = MongoClient('localhost', 27017)
+db = client.admin
+config = db.command("replSetGetConfig")["config"]
+config["members"].append({"_id": 1, "host": "localhost:27018"})
+config["members"].append({"_id": 2, "host": "localhost:27019"})
+db.command("replSetReconfig", config)
+"""
+
+# Vérifier le statut du set de réplication
+"""
+print(db.command("replSetGetStatus"))
+"""
+
+# Créer une base de données et insérer des données
+"""
+client = MongoClient('localhost', 27017)
+db = client.GameOfThrones
+db.create_collection("characters")
+db.characters.insert_many([
+    {"name": "Jon Snow", "age": 25, "house": "Stark"},
+    {"name": "Daenerys Targaryen", "age": 23, "house": "Targaryen"},
+    {"name": "Tyrion Lannister", "age": 30, "house": "Lannister"}
+])
+"""
+
+# Vérifier la réplication
+
+# Se connecter à la deuxième instance mongod
+"""
+client = MongoClient('localhost', 27018)
+db = client.GameOfThrones
+print(list(db.characters.find()))
+"""
+
+# Se connecter à la troisième instance mongod
+"""
+client = MongoClient('localhost', 27019)
+db = client.GameOfThrones
+print(list(db.characters.find()))
+"""
+
+# Tester les opérations de lecture et d'écriture sur les instances secondaires
+
+# Éteindre la première instance mongod
+"""
+client = MongoClient('localhost', 27017)
+db = client.admin
+db.command("shutdown")
+"""
+
+# Vérifier l'élection d'un nouveau primaire
+
+# Nettoyage
+
+# Éteindre les instances mongod restantes
+"""
+client = MongoClient('localhost', 27018)
+db = client.admin
+db.command("shutdown")
+"""
+
+"""
+client = MongoClient('localhost', 27019)
+db = client.admin
+db.command("shutdown")
+"""
+
+# Supprimer les répertoires de données
+"""
+import shutil
+shutil.rmtree("D:\\Cours_NoSQL\\data\\db1")
+shutil.rmtree("D:\\Cours_NoSQL\\data\\db2")
+shutil.rmtree("D:\\Cours_NoSQL\\data\\db3")
+"""
