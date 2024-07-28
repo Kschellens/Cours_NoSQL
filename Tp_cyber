@@ -1,0 +1,107 @@
+2. **Exécuter le script :**
+
+```bash
+./setup_mongodb.sh
+```
+
+### Résultats Attendus
+
+1. **Les instances MongoDB Docker :**
+
+- MongoDB Docker image sera téléchargée.
+- Un conteneur MongoDB sera démarré et exposé sur le port 27017.
+
+2. **Création et Gestion des Bases de Données :**
+
+- La base de données `Galaxies` sera créée avec deux collections : `Stars` et `Planets`.
+- 5 documents seront insérés dans chaque collection.
+- Des index seront créés sur le champ `Name` pour les collections `Stars` et `Planets`.
+
+3. **Sauvegarde et Restauration :**
+
+- Une sauvegarde de la base de données `Galaxies` sera créée.
+- La base de données `Galaxies_Restored` sera restaurée à partir de la sauvegarde.
+
+4. **Contrôle d'Accès Basé sur les Rôles :**
+
+- Un nouvel utilisateur avec le rôle `readWrite` sera créé pour la base de données `Galaxies_Restored`.
+- L'utilisateur pourra insérer un nouveau document dans la collection `Stars`.
+
+### Résumé
+
+Dans ce laboratoire, vous avez appris à configurer MongoDB en utilisant Docker, à gérer des bases de données et des collections, à créer des sauvegardes et à restaurer des données en utilisant des commandes terminal en Bash ou PowerShell. Vous avez également appris à configurer le contrôle d'accès basé sur les rôles et à automatiser des tâches en utilisant Docker Compose et des scripts shell.
+
+### Scripts Complets
+
+#### Docker Compose
+
+**Fichier `docker-compose.yml` :**
+
+```yaml
+version: '3.8'
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb_container
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data:/data/db
+```
+
+#### Script Shell
+
+**Fichier `setup_mongodb.sh` :**
+
+```bash
+#!/bin/bash
+
+# Pull MongoDB Docker image
+docker pull mongo:latest
+
+# Run MongoDB container
+docker-compose up -d
+
+# Wait for MongoDB to start
+sleep 10
+
+# Connect to MongoDB and set up database and collections
+docker exec -it mongodb_container mongosh --eval "
+use Galaxies;
+db.createCollection('Stars');
+db.Stars.insertMany([
+    { name: 'Sirius', type: 'Main Sequence', age: 242, distanceFromEarth: 8.6 },
+    { name: 'Betelgeuse', type: 'Red Supergiant', age: 8.5, distanceFromEarth: 642.5 },
+    { name: 'Proxima Centauri', type: 'Red Dwarf', age: 4.85, distanceFromEarth: 4.24 },
+    { name: 'Vega', type: 'Main Sequence', age: 455, distanceFromEarth: 25.04 },
+    { name: 'Polaris', type: 'Supergiant', age: 70, distanceFromEarth: 433 }
+]);
+db.createCollection('Planets');
+db.Planets.insertMany([
+    { name: 'Mercure', type: 'Tellurique', numberOfMoons: 0, distanceFromSun: 57.91 },
+    { name: 'Venus', type: 'Tellurique', numberOfMoons: 0, distanceFromSun: 108.2 },
+    { name: 'Terre', type: 'Tellurique', numberOfMoons: 1, distanceFromSun: 149.6 },
+    { name: 'Mars', type: 'Tellurique', numberOfMoons: 2, distanceFromSun: 227.9 },
+    { name: 'Jupiter', type: 'Gazeuse', numberOfMoons: 79, distanceFromSun: 778.5 }
+]);
+db.Stars.createIndex({ name: 1 });
+db.Planets.createIndex({ name: 1 });
+"
+
+# Create a backup
+docker exec mongodb_container mongodump --db Galaxies --archive=/data/db/galaxies_backup.archive
+```
+
+### Commandes pour Exécuter
+
+1. **Rendre le script exécutable :**
+
+```bash
+chmod +x setup_mongodb.sh
+```
+
+2. **Exécuter le script :**
+
+```bash
+./setup_mongodb.sh
+```
